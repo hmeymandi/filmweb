@@ -37,10 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
+    #Crispy Forms
+    'crispy_bootstrap5',
+    'crispy_forms',
+    #Djangoauth
+    'allauth',
+    'allauth.account',
+    #application
+    'accounts',
+    'pages',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -100,6 +110,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+   
+   'django.contrib.auth.backends.ModelBackend', 
+   'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -125,4 +143,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #app_settings
 
-AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_REDIRECT_URL = 'page1'
+LOGOUT_REDIRECT_URL = 'page1'
+ACCOUNT_SESSION_REMEMBER = True
+
+# crispy_forms settings
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+

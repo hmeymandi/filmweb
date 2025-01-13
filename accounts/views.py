@@ -4,3 +4,4 @@ from django.shortcuts import render,HttpResponse
 
 def home(request):
     return HttpResponse("Welcome to Film Web Application! <a href='/movies'>View Movies</a>")
+
