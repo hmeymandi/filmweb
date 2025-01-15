@@ -1,0 +1,57 @@
+{% extends "_base.html" %}
+
+{% block title %}
+    دانلود فیلم
+    {% endblock title %}
+
+{% block content %}
+<div class="movie-area pt-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="site-heading-inline" dir="rtl">
+                    <h2 class="site-title">جدیدترین فیلم ها</h2>
+                    <a href="#" class="theme-btn">مشاهده همه<i class="far fa-angles-left"></i></a>
+                </div>
+            </div>
+        </div>
+<div class="row row-cols-xl-5">
+    {% for list in object_list %}
+    <div class="col-6 col-md-4 col-lg-3 col-xl">
+        <div class="movie-item">
+            <span class="movie-quality">{{list.rating}} امتیاز</span>
+            <div class="movie-img">
+                <img src="{{ list.image.url }}" alt="">
+                <a href="{% url 'filmdetail' list.slug %}" class="movie-play"><i class="icon-play-3"></i></a>
+            </div>
+            <div class="movie-content">
+                <h6 class="movie-title"><a href="#">{{list.title}}</a></h6>
+                <div class="movie-info">
+                    <span class="movie-time">{{list.duration}} دقیقه</span>
+                    <div class="movie-genre">
+                        <a href="#">{{list.genre}} ژانر</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
