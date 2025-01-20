@@ -22,3 +22,15 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Film,MovieAdmin)
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('film', 'author', 'body', 'created_at')
+    list_filter = ('film', 'author', 'created_at')
+    search_fields = ('film', 'author', 'body')
+    
+    
+    
+    
+
+
+admin.site.register(Comment, CommentAdmin)

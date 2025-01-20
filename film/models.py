@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 # Create your models here.
 
@@ -25,3 +27,29 @@ class Film(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Comment(models.Model):
+    Film_Starts =[('1','very_bad'),
+                  ('2','bad'),
+                  ('3','normal'),
+                  ('4','good'),
+                  ('5','very_good')]
+                  
+                  
+                  
+                  
+                  
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='comments')           
+    author = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name='comments')
+    body = models.TextField()
+    stars = models.CharField(max_length=20, choices=Film_Starts)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.film.title}'
+    
+    def get_absolute_url(self):
+        return reverse("filmdetail", args=[self.film.slug])
+    

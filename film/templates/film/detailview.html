@@ -1,6 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="site-breadcrumb" style="background: url({% static 'images/01-bg-ganr.jpeg' %});">
@@ -170,6 +170,8 @@
                         <div class="movie-keyword">
                             <span>کلمه کلیدی :</span>
                             <a href="#">مشاهده</a>
+
+                           
                             
                         </div>
                     </div>
@@ -178,6 +180,75 @@
         </div>
     </div>
 </div>
+
+
+
+
+<div class="movie-comment mt-50">
+    <div class="tab-content" id="movieComment-tabContent">
+        <div class="comment-form">
+            <h4>ارسال دیدگاه</h4>
+            
+            
+
+            <form action="{% url 'comment_create' film.id %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    {{comments|crispy}}
+                        <button type="submit" class="theme-btn">ارسال دیدگاه <i class="far fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="site-heading text-center">
+                <span class="site-title-tagline">دیدگاه ها</span>
+                <h2 class="site-title text-white">دیدگاه سایر کاربران <span></span></h2>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial-list">
+        {% for comment in film.comments.all %}
+        <div class="testimonial-item" dir="rtl">
+            <div class="testimonial-rate">
+                {% for i in ""|center:comment.stars %}
+                    <i class="fas fa-star"></i>
+                {% endfor %}
+            </div>
+            
+            <div class="testimonial-quote">
+                <p>{{ comment.body }}</p>
+            </div>
+            <div class="testimonial-author">
+                <div class="author-img">
+                    <img src="{{ comment.author_image.url }}" alt="">
+                </div>
+                <div class="author-info">
+                    <h4>{{ comment.author }}</h4>
+                    <p>کاربر</p>
+                </div>
+            </div>
+            <span class="quote-icon"><i class="icon-quote-2"></i></span>
+        </div>
+        {% empty %}
+        <p>هیچ دیدگاهی برای این فیلم ثبت نشده است.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
 
 {% endblock content %}
 
