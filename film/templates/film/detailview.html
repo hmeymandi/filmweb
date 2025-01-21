@@ -117,7 +117,12 @@
                                 <div class="col-md-6">
                                     <div class="movie-info-item">
                                         <strong>ژانر:</strong>
-                                        <a href="#">{{film.genre}}</a>
+                                        {% for genre in film.genre.all  %}
+                                        <a href="#">{{ genre.name }}</a>{% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            <span>هیچ بازیگری ثبت نشده است</span>
+                                        
+                                        {% endfor %}
                                       
                                     </div>
                                     <div class="movie-info-item">
@@ -126,10 +131,11 @@
                                     </div>
                                     <div class="movie-info-item">
                                         <strong>بازیگران:</strong>
-                                        <a href="#">دیکاپریو,</a>
-                                        <a href="#">تام کروز,</a>
-                                        <a href="#">آنجلینا جولی,</a>
-                                        <a href="#">آنتونی روبرت</a>
+                                        {% for actor in film.actors.all %}
+                                            <a href="#">{{ actor.full_name }}</a>{% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            <span>هیچ بازیگری ثبت نشده است</span>
+                                        {% endfor %}
                                     </div>
                                     <div class="movie-info-item">
                                         <strong>کشور:</strong>
@@ -161,9 +167,9 @@
                     <div class="col-md-7 col-lg-3">
                         <div class="movie-download">
                             <h5>دانلود:</h5>
-                            <a href="#" class="theme-btn"><span class="fas fa-arrow-down-to-arc"></span>دانلود: 576p</a>
-                        <a href="#" class="theme-btn"><span class="fas fa-arrow-down-to-arc"></span>دانلود: 720p</a>
-                        <a href="#" class="theme-btn"><span class="fas fa-arrow-down-to-arc"></span>دانلود: 1080p</a>
+                            <a href="{{film.download_link_480}}" class="theme-btn"><span class="fas fa-arrow-down-to-arc"></span>دانلود: 480p</a>
+                        <a href="{{film.download_link_720}}" class="theme-btn"><span class="fas fa-arrow-down-to-arc"></span>دانلود: 720p</a>
+                        <a href="{{film.download_link_1080}}" class="theme-btn"><span class="fas fa-arrow-down-to-arc"></span>دانلود: 1080p</a>
                         </div>
                     </div>
                     <div class="col-12">
