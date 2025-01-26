@@ -12,4 +12,5 @@
 برای راه‌اندازی این پروژه در سیستم محلی خود، مراحل زیر را دنبال کنید:
 
 کلون کردن مخزن ابتدا مخزن را به سیستم محلی خود کلون کنید:
+
 git clone https://github.com/yourusername/film-series-management.git
