@@ -2,7 +2,7 @@
 
 {% block title %}
     دانلود فیلم
-    {% endblock title %}
+{% endblock title %}
 
 {% block content %}
 <div class="movie-area pt-70">
@@ -10,48 +10,73 @@
         <div class="row">
             <div class="col-12">
                 <div class="site-heading-inline" dir="rtl">
-                    <h2 class="site-title">جدیدترین فیلم ها</h2>
+                    <h2 class="site-title">جدیدترین فیلم‌ها</h2>
+                    <a href="{% url 'allfilmlist' %}" class="theme-btn">مشاهده همه<i class="far fa-angles-left"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-xl-5">
+            {% for movie in movies %}
+            <div class="col-6 col-md-4 col-lg-3 col-xl">
+                <div class="movie-item">
+                    <span class="movie-quality">{{ movie.rating }} امتیاز</span>
+                    <div class="movie-img">
+                        <img src="{{ movie.image.url }}" alt="{{ movie.title }}">
+                        <a href="{% url 'filmdetail' movie.slug %}" class="movie-play"><i class="icon-play-3"></i></a>
+                    </div>
+                    <div class="movie-content">
+                        <h6 class="movie-title"><a href="{% url 'filmdetail' movie.slug %}">{{ movie.title }}</a></h6>
+                        <div class="movie-info">
+                            <span class="movie-time">{{ movie.duration }} دقیقه</span>
+                            <div class="movie-genre">
+                                {% for genre in movie.genre.all %}
+                                    <a href="#">{{ genre.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="movie-area pt-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="site-heading-inline" dir="rtl">
+                    <h2 class="site-title">جدیدترین سریال‌ها</h2>
                     <a href="#" class="theme-btn">مشاهده همه<i class="far fa-angles-left"></i></a>
                 </div>
             </div>
         </div>
-<div class="row row-cols-xl-5">
-    {% for list in object_list %}
-    <div class="col-6 col-md-4 col-lg-3 col-xl">
-        <div class="movie-item">
-            <span class="movie-quality">{{list.rating}} امتیاز</span>
-            <div class="movie-img">
-                <img src="{{ list.image.url }}" alt="">
-                <a href="{% url 'filmdetail' list.slug %}" class="movie-play"><i class="icon-play-3"></i></a>
-            </div>
-            <div class="movie-content">
-                <h6 class="movie-title"><a href="#">{{list.title}}</a></h6>
-                <div class="movie-info">
-                    <span class="movie-time">{{list.duration}} دقیقه</span>
-                    <div class="movie-genre">
-                        <a href="#">{{list.genre}} ژانر</a>
-                        
+        <div class="row row-cols-xl-5">
+            {% for series in series1 %}
+            <div class="col-6 col-md-4 col-lg-3 col-xl">
+                <div class="movie-item">
+                    <span class="movie-quality">{{ series.rating }} امتیاز</span>
+                    <div class="movie-img">
+                        <img src="{{ series.image.url }}" alt="{{ series.title }}">
+                        <a href="{% url 'seriesdetail' series.slug %}" class="movie-play"><i class="icon-play-3"></i></a>
+                    </div>
+                    <div class="movie-content">
+                        <h6 class="movie-title"><a href="{% url 'seriesdetail' series.slug %}">{{ series.title }}</a></h6>
+                        <div class="movie-info">
+                            <span class="movie-time">{{ series.duration }} دقیقه</span>
+                            <div class="movie-genre">
+                                
+                                {% for genre in series.genre.all %}
+                                    <a href="#">{{ genre.name }}hh</a>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-        
-
-
-
-
-
-    </div>
 </div>
-
-
-
-
-
-
-
-
-
 {% endblock content %}

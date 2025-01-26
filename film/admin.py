@@ -59,3 +59,26 @@ class SeriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Series, SeriesAdmin)
+
+class SeasonAdmin(admin.ModelAdmin):
+    list_display = ('series', 'number', )
+    list_filter = ('series', 'number', )
+    search_fields = ('series', 'number',)
+
+
+
+admin.site.register(Season, SeasonAdmin)
+
+
+class EpisodeAdmin(admin.ModelAdmin):
+    list_display = ('season','download_links','duration')
+    list_filter = ('season', 'download_links')
+    search_fields = ('season',)
+
+admin.site.register(Episode, EpisodeAdmin)
+
+class SeriesCommentAdmin(admin.ModelAdmin):
+    list_display = ('series', 'author', 'body', 'created_at')
+    list_filter = ('series', 'author', 'created_at')
+    search_fields = ('series', 'author', 'body')
+admin.site.register(SeriesComment, SeriesCommentAdmin)

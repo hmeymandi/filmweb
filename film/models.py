@@ -58,6 +58,7 @@ class Film(models.Model):
     def __str__(self):
         return self.title
 
+
 class Series(models.Model):
     title = models.CharField(max_length=200)
     slug=models.SlugField(max_length=200, unique=True)
@@ -71,12 +72,23 @@ class Series(models.Model):
     image = models.ImageField(upload_to='serirs_images')
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    download_link_480 = models.URLField(blank=True)
-    download_link_720 = models.URLField(blank=True)
-    download_link_1080 = models.URLField(blank=True)
-
+  
     def __str__(self):
         return self.title
+    
+
+class Season(models.Model):
+    number = models.IntegerField()
+    series = models.ForeignKey(Series, related_name='seasons', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Season {self.number} of {self.series.title}'
+
+class Episode(models.Model):
+    title = models.CharField(max_length=255)
+    duration = models.CharField(max_length=50)  # مثلاً "۱ ساعت ۲۰ دقیقه"
+    season = models.ForeignKey(Season, related_name='episodes', on_delete=models.CASCADE)
+    download_links = models.JSONField()  # {'1080': ['link1', 'link2'], '720': ['link3']}
     
 class Comment(models.Model):
     Film_Starts =[('1','خیلی بد'),
@@ -86,7 +98,7 @@ class Comment(models.Model):
                   ('5','عالی')]                 
                                        
                   
-    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='comments')           
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='comments')     
     author = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name='comments')
     body = models.TextField()
     stars = models.CharField(max_length=20, choices=Film_Starts)
@@ -95,8 +107,31 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'Comment by {self.author.username} on {self.film.title}'
+        return f'Comment by {self.author.username} on {self.film.title} '
     
     def get_absolute_url(self):
         return reverse("filmdetail", args=[self.film.slug])
+    
+class SeriesComment(models.Model):
+    Film_Starts =[('1','خیلی بد'),
+                  ('2','بد'),
+                  ('3','عادی'),
+                  ('4','خوب'),
+                  ('5','عالی')]                 
+                                       
+                  
+    
+    series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='sereiscomments')          
+    author = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,related_name='sereiscomments')
+    body = models.TextField()
+    stars = models.CharField(max_length=20, choices=Film_Starts)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.series.title} '
+    
+    def get_absolute_url(self):
+        return reverse("seriesdetail", args=[self.series.slug])
     
