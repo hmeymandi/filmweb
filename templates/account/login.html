@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load crispy_forms_tags%}
 
 
 {% block title %}
@@ -8,11 +9,44 @@ Login
 
 {% block content %}
 
-<form actions="" method ='post'>
-    {% csrf_token %}
-    {{form.as_p}}
 
-<input type="button" value="Login">
-</form>
+<div class="container">
+    <div class="col-md-5 col-lg-4 mx-auto">
+        <div class="auth-wrap">
+            <div class="auth-header">
+                <img src="images/logo.png" class="logo-dark-mode" alt="" style="display: block;">
+                <img src="images/logo-dark.png" class="logo-light-mode" alt="" style="display: none;">
+                <p>   ورود به سایت </p>
+            </div>
+            <div class="auth-form">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="auth-btn">
+                        <button type="submit" class="theme-btn"><span class="far fa-sign-in"></span>ورود</button>
+                    </div>
+                </form>
+                
+                <div class="auth-footer">
+                    
+                    <p>اکانت کاربری ندارید ؟ <a href="{%url 'account_signup' %}">ثبت نام</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
 
 {% endblock content %}

@@ -2408,7 +2408,7 @@ progress {
 .form-text {
     margin-top: .25rem;
     font-size: .875em;
-    color: var(--bs-secondary-color)
+    color: yellow
 }
 
 .form-control {

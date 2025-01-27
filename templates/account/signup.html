@@ -7,13 +7,61 @@ sign up
 
 
 {% block content %}
-<form action="" method='post'>
-    {% csrf_token %}
+<div class="container">
+    <div class="col-md-5 col-lg-4 mx-auto">
+        <div class="auth-wrap">
+            <div class="auth-header">
+                <img src="images/logo.png" class="logo-dark-mode" alt="" style="display: block;">
+                <img src="images/logo-dark.png" class="logo-light-mode" alt="" style="display: none;">
+                <p>ساخت حساب کاربری </p>
+            </div>
+            <div class="auth-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <h2>ثبت‌نام</h2>
 
-    {{ form|crispy }}
+                    <!-- نمایش پیام‌های خطا (در صورت وجود) -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
 
-<input type="submit" value="signup">
-</form>
+                    <!-- نمایش فرم با استایل crispy -->
+                    <div class="form-group">
+                        {{ form|crispy }}
+                    </div>
+                    
+
+                    <div class="auth-check">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="agree">
+                            <label class="form-check-label" for="agree">
+                                من موافقت می‌کنم با <a href="#">قوانین و مقررات.</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="auth-btn">
+                        <button type="submit" class="theme-btn"><span class="far fa-paper-plane"></span>ثبت‌نام</button>
+                    </div>
+                </form>
+
+                <div class="auth-footer">
+                  
+                    <p>اکانت کاربری دارید؟ <a href="login.html">ورود</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     
 {% endblock content %}
     

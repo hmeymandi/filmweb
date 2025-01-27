@@ -7,11 +7,23 @@ Logout
 
 
 {% block content %}
-<h1>Are you sure Logout ?</h1>
-<form actions="" method ='post'>
-  {% csrf_token %}
-
-<input type="submit" value="Sing out ">
-</form>
+<div class="container">
+  <div class="col-md-5 col-lg-4 mx-auto">
+      <div class="auth-wrap">
+          <div class="auth-header">
+              <p>خروج از حساب کاربری</p>
+          </div>
+          <div class="auth-form">
+              <form method="post">
+                  {% csrf_token %}
+                  <p>آیا از خروج از حساب خود مطمئن هستید؟</p>
+                  <div class="auth-btn">
+                      <input type="submit" class="theme-btn" value="خروج">
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
 
 {% endblock content %}

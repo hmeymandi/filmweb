@@ -198,7 +198,7 @@ body {
 }
 
 a {
-  color:  var(--color-dark);
+  color:  blue;
   display: inline-block;
 }
 
@@ -2314,6 +2314,7 @@ label {
   transition: var(--transition);
   top: 38%;
 }
+
 
 .movie-slider .owl-nav button:hover{
 	background: var(--theme-color)!important;

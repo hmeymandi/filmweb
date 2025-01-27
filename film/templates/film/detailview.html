@@ -4,7 +4,19 @@
 
 {% block content %}
 
-
+<style>
+    .alert-warning {
+        position: relative;
+        top: 10px; /* فاصله از بالا */
+        margin-bottom: 20px; /* فاصله از پایین برای جلوگیری از برخورد با محتوای زیر */
+        padding: 15px;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        z-index: 1000;
+    }
+</style>
 <div class="site-breadcrumb" style="background: url({% static 'images/01-bg-ganr.jpeg' %});">
     
 
@@ -127,12 +139,11 @@
 
 
 
-
+{% if user.is_authenticated %}
 <div class="movie-comment mt-50">
     <div class="tab-content" id="movieComment-tabContent">
         <div class="comment-form">
-            <h4>ارسال دیدگاه</h4>
-            
+            <h4>ارسال دیدگاه</h4>                      
             
 
             <form action="{% url 'comment_create' film.id %}" method="POST">
@@ -146,6 +157,13 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="alert alert-warning " role="alert">
+        برای ارسال دیدگاه، ابتدا باید وارد حساب کاربری خود شوید.
+    </div>
+{% endif %}
+
+
 
 
 

@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from .models import Series, Film
 from django.core.paginator import Paginator
 from .models import *
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -72,7 +72,7 @@ class FilmDetailView(generic.DetailView):
         context['comments'] = CommentForm()
         return context
 
-class CommentCreateView(generic.CreateView):
+class CommentCreateView(generic.CreateView, LoginRequiredMixin):
     model = Comment
     form_class = CommentForm  
     
@@ -87,7 +87,7 @@ class CommentCreateView(generic.CreateView):
         return super().form_valid(form)
     
 
-class SeriesCommentCreateView(generic.CreateView):
+class SeriesCommentCreateView(generic.CreateView,LoginRequiredMixin):
     model = SeriesComment
     form_class = SeriesCommentForm  
     
