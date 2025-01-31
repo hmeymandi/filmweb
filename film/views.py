@@ -7,28 +7,47 @@ from .models import Series, Film
 from django.core.paginator import Paginator
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+
 # Create your views here.
 
 
 
 class CombinedListView(TemplateView):
     template_name = 'film/listview.html'
+
     def get_template_names(self):
+        # Return the appropriate template based on the 'template' kwarg
         if self.kwargs.get('template') == 'template2':
-            return ['film/filmlist.html']
+            return ['film/filmlist.html']  # Ensure this is a list of template strings
+        if self.kwargs.get('template') == 'template3':
+            return ['film/serieslist.html']  # Ensure this is a list of template strings
         return [self.template_name]
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['series1'] = Series.objects.all().order_by('-id')[:10]
-        movie_list = Film.objects.all().order_by('-id')
-        movie_paginator = Paginator(movie_list, 10) 
-        page_number = self.request.GET.get('page')
         
-        movie_page = movie_paginator.get_page(page_number)
-        context['movies'] = movie_page
+        # Latest 10 series for a specific section
+        context['series1'] = Series.objects.all().order_by('-id')[:10]
+        
+        # Movie and Series querysets without slicing to allow full pagination
+        movie_list = Film.objects.all().order_by('-id')
+        series_list = Series.objects.all().order_by('-id')
+        
+        # Create paginators for each queryset
+        movie_paginator = Paginator(movie_list, 10) 
+        series_paginator = Paginator(series_list, 10)
+        
+        # Get page numbers from separate query parameters
+        movie_page_number = self.request.GET.get('movie_page')
+        series_page_number = self.request.GET.get('series_page')
+        
+        # Get the pages for each paginator
+        context['movies'] = movie_paginator.get_page(movie_page_number)
+        context['series'] = series_paginator.get_page(series_page_number)
+        
         return context
-
 
 # class FilmListView(generic.ListView):
 #     model = Film
@@ -42,8 +61,6 @@ class CombinedListView(TemplateView):
 #     context_object_name = "series1"
 #     template_name = "film/listview.html"
 
-from django.shortcuts import get_object_or_404
-from django.views import generic
 
 class SeriesDetailView(generic.DetailView):
     model = Series

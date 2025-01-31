@@ -9,7 +9,8 @@ urlpatterns = [
     path('film/detail/<slug:slug>', FilmDetailView.as_view(), name='filmdetail'),
     path('comment/film/<int:film_id>/',CommentCreateView.as_view(), name='comment_create' ),
     path('comment/series/<int:series_id>/',SeriesCommentCreateView.as_view(), name='comment_create1' ),
-    path('filmlist/', CombinedListView.as_view(), {'template': 'template2'}, name='allfilmlist')
+    path('filmlist/', CombinedListView.as_view(), {'template': 'template2'}, name='allfilmlist'),
+    path('serieslist/', CombinedListView.as_view(), {'template': 'template3'}, name='allseireslist'),
    
 ]
 
